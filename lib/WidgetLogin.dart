@@ -8,17 +8,31 @@ class WidgetLogin extends StatefulWidget {
 
 class _WidgetLoginState extends State<WidgetLogin> {
   // final String nome;
+  
+  final myController = TextEditingController();
+  
+  
   @override
   Widget build(BuildContext context) {
-    addStringToSf() async {
+    getStringToSf() async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.getString(addStringToSf());
+      
+      myController.text=prefs.getString('nome');
     }
 
     setStringToSf(String nome) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString(nome, 'auri');
+      prefs.setString('nome', nome);
     }
+    
+    void initState() {
+    super.initState();{
+      getStringToSf();
+    }
+   
+    
+  }
+ 
 
     return Scaffold(
       // backgroundColor: Colors.white,
@@ -46,13 +60,13 @@ class _WidgetLoginState extends State<WidgetLogin> {
               SizedBox(
                 height: 50,
               ),
-              TextField(
-                setStringToSf('nome'),
+              TextField(     
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.italic,
+                  fontStyle: FontStyle.italic,                   
                 ),
+                controller: myController,
                 decoration: InputDecoration(
                   labelText: "Resposta",
                   border: OutlineInputBorder(
@@ -73,7 +87,7 @@ class _WidgetLoginState extends State<WidgetLogin> {
                   ),
                   color: Colors.blue,
                   onPressed: () {
-                    addStringToSf();
+                   setStringToSf('teste');
                   },
                   child: Row(
                     children: <Widget>[
