@@ -14,7 +14,6 @@ class _WidgetLoginState extends State<WidgetLogin> {
   Widget build(BuildContext context) {
     getStringToSf() async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-
       myController.text = prefs.getString('nome');
     }
 
